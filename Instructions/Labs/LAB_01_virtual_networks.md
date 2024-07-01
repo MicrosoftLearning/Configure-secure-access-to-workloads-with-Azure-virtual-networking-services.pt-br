@@ -4,11 +4,11 @@ lab:
   module: Guided Project - Configure secure access to workloads with Azure virtual networking services
 ---
 
-# Laboratório: fornecer isolamento e segmentação de rede para o aplicativo Web
+# Laboratório: Forneça uma rede virtual de hub de serviços compartilhados com isolamento e segmentação
 
 ## Cenário
 
-O departamento de TI precisa de isolamento e segmentação de rede para o aplicativo Web. Para fornecer isolamento e segmentação de rede para o aplicativo Web, você precisa criar uma rede virtual do Azure com sub-redes fornecidas pela equipe de TI. Após a rede virtual ser criada, a próxima etapa é configurar o emparelhamento de rede virtual. Isso permite que as redes virtuais se comuniquem entre si de modo seguro e privado.
+Você foi encarregado de aplicar os [princípios Confiança Zero](https://learn.microsoft.com/security/zero-trust/azure-infrastructure-networking) a uma rede virtual de hub no Azure. O departamento de TI precisa de isolamento e segmentação de rede para a aplicação web em uma rede falada. Para fornecer isolamento e segmentação de rede para a aplicação web, é necessário criar uma rede virtual Azure com sub-redes com espaço de endereço fornecido pela equipa de TI. Após a rede virtual ser criada, a próxima etapa é configurar o emparelhamento de rede virtual. Isso permite que as redes virtuais se comuniquem entre si de modo seguro e privado.
 
 ### Diagrama de arquitetura
 
@@ -25,9 +25,9 @@ O departamento de TI precisa de isolamento e segmentação de rede para o aplica
 >**Observação**: para concluir este laboratório, você precisará de uma [Assinatura do Azure](https://azure.microsoft.com/free/) com a função RBAC do **Colaborador** atribuída.
 > Neste laboratório, quando for solicitado que você crie um recurso, para qualquer propriedade que não for especificada, use o valor padrão.
 
-### Criar redes virtuais e sub-redes
+### Criar redes e sub-redes virtuais hub and spoke
 
-Comece criando as redes mostradas no diagrama acima.
+Comece criando as redes virtuais mostradas no diagrama acima.
 
 1. Abra um navegador, navegue até o <a href="https://portal.azure.com/#home">portal do Azure</a> e faça logon.
 1. Para criar uma Rede Virtual, na barra de pesquisa da parte superior do portal, insira **"Redes virtuais"** e escolha **"Redes virtuais"** nos resultados.
@@ -46,22 +46,22 @@ Comece criando as redes mostradas no diagrama acima.
     | Intervalo de endereços da sub-rede | **10.1.1.0/24** |
 
     **Observação**: deixe todas as outras configurações como padrão. Selecione **"Avançar"** para avançar para a próxima guia e **Criar** para criar a rede virtual.
-1. Seguindo as mesmas etapas acima, crie a rede virtual do Azure **shared-services-vnet** usando os valores da seguinte tabela:
+1. Seguindo os mesmos passos acima, crie a rede virtual Azure **Hub-vnet** utilizando os valores da tabela seguinte:
 
     | Propriedade             | Valor                    |
     | :------------------- | :----------------------- |
     | Resource group       | **RG1**                  |
-    | Nome                 | **shared-services-vnet** |
+    | Nome                 | **Hub-vnet** |
     | Region               | **Leste dos EUA**              |
     | Espaço de endereço IPv4   | **10.0.0.0/16**          |
-    | Nome da sub-rede          | **frontend**             |
+    | Nome da sub-rede          | **AzureFirewallSubnet**  |
     | Intervalo de endereços da sub-rede | **10.0.0.0/24**          |
 
 1. Quando a implantação estiver concluída. Navegue de volta para o portal, na barra de pesquisa digite **"grupos de recursos"** e selecione **"Grupos de Recursos"** nos resultados. Selecione **"RG1"** no painel principal e confirme que ambas as redes virtuais foram implantadas.
 
 ### Configurar uma relação de par entre as redes virtuais
 
-1. Configurar uma relação de pares entre as duas redes virtuais permitirá que o tráfego flua em ambas as direções entre as redes virtuais **app-vnet** e **shared-services-vnet**.
+1. A configuração de uma relação de pares entre as duas redes virtuais permitirá que o tráfego flua em ambas as direções entre as redes virtuais **app-vnet** e **hub-vnet**.
 1. No Portal, na exibição do grupo de recursos RG1. Selecione a rede virtual **"app-vnet"**.
 1. No menu de contexto **app-vnet** no lado esquerdo do portal, role para baixo e selecione **emparelhamento **
 1. No painel de emparelhamentos **app-vnet**, selecione **+ Adicionar**.
@@ -69,9 +69,9 @@ Comece criando as redes mostradas no diagrama acima.
 
     | Propriedade                                 | Valor                          |
     | :--------------------------------------- | :----------------------------- |
-    | O nome do link de emparelhamento desta rede virtual   | **app-vnet-to-sharedservices** |
-    | Nome do link de emparelhamento da rede virtual remota | **sharedservices-to-app-vnet** |
-    | Rede virtual                          | **shared-services-vnet**       |
+    | O nome do link de emparelhamento desta rede virtual   | **app-vnet-to-hub** |
+    | Nome do link de emparelhamento da rede virtual remota | **hub-to-app-vnet** |
+    | Rede virtual                          | **hub-vnet**       |
 
     **Observação**: deixe todas as outras configurações como padrão. Selecione **"Adicionar"** para criar o emparelhamento de rede virtual.
 
