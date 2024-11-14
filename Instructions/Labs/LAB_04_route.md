@@ -1,91 +1,85 @@
 ---
 lab:
-  title: 'Exercício: rotear o tráfego para o firewall'
+  title: 'Exercício 04: configurar o roteamento de rede'
   module: Guided Project - Configure secure access to workloads with Azure virtual networking services
 ---
 
-# Laboratório: rotear o tráfego para o firewall
+# Exercício 04: configurar o roteamento de rede
 
 ## Cenário
 
-Agora que há um firewall implantado, com políticas que impõem requisitos de segurança às suas organizações, você precisa rotear o tráfego de rede para a sub-rede do firewall a fim de permitir que ele filtre e inspecione o tráfego. As tabelas de rotas fornecem controle sobre o roteamento do tráfego de rede de/para o aplicativo Web. O tráfego de rede está sujeito às regras do firewall quando você direciona o tráfego de rede ao firewall como o gateway padrão da sub-rede.
+Para garantir que as políticas de firewall sejam aplicadas, o tráfego de aplicativos de saída deve ser roteado pelo firewall. Você identifica esses requisitos. 
++ Uma tabela de rotas é necessária. Essa tabela de rotas será associada às sub-redes de front-end e back-end.  
++ Uma rota é necessária para filtrar todo o tráfego IP de saída das sub-redes para o firewall. O endereço IP privado do firewall será usado. 
 
-### Diagrama de arquitetura
+## Tarefas de habilidades
+
++ Criar e configurar uma tabela de rotas.
++ Vincular uma tabela de rotas a uma sub-rede.
+  
+## Diagrama de arquitetura
 
 ![Diagrama que mostra uma rede virtual com um firewall e uma tabela de rotas.](../Media/task-3.png)
 
-### Tarefas de habilidades
 
-- Criar e configurar uma tabela de rotas.
-- Vincular uma tabela de rotas a uma sub-rede.
-  
 ## Instruções para o exercício
 
 ### Criar uma tabela de rotas
 
-1. Registre o endereço IP público e privado de **app-vnet-firewall**.
+O Azure cria automaticamente uma [tabela de rotas](https://learn.microsoft.com/azure/virtual-network/virtual-networks-udr-overview) para cada sub-rede dentro de uma rede virtual do Azure. A tabela de rotas padrão inclui as [rotas padrão do sistema](https://learn.microsoft.com/azure/virtual-network/virtual-networks-udr-overview#system-routes): Você pode criar tabelas de rotas e rotas para substituir as rotas padrão do sistema do Azure.
 
-    1. Na caixa de pesquisa na parte superior do portal, insira **Firewall**. Selecione **Firewall** nos resultados da pesquisa.
+**Registrar o endereço IP privado de app-vnet-firewall.**
 
-    1. Selecione **app-vnet-firewall**.
+1. Na caixa de pesquisa na parte superior do portal, insira **Firewall**. Selecione **Firewall** nos resultados da pesquisa.
 
-    1. Selecione **Visão geral**.
+1. Selecione **app-vnet-firewall**.
 
-        1. Registre o **endereço IP privado**.
+1. Selecione **Visão geral** e registre o **endereço IP privado**.
 
-    1. No painel Visão Geral selecione **fwpip**
-
-    1. Registre o **endereço IP público**.
+**Adicione a tabela de rotas**
 
 1. Na caixa de pesquisa, insira **Tabela de rotas**. Quando a Tabela de rotas é exibida nos resultados da pesquisa, selecione-a.
 
-1. Na página Tabela de rotas, selecione **+ Criar**.
-
-1. Na guia **Noções básicas**, crie uma nova tabela de rotas usando as informações na tabela a seguir:
+1. Na página Tabela de rotas, clique em **+ Criar** e crie a tabela de rotas. 
 
     | Propriedade       | Valor                        |
     | :------------- | :--------------------------- |
     | Subscription   | **Selecione sua assinatura** |
     | Grupo de recursos | **RG1**                      |
     | Region         | **Leste dos EUA**                  |
-    | Nome           | **app-vnet-firewall-rt**     |
+    | Nome           | `app-vnet-firewall-rt`     |
 
-1. Selecione **Examinar + Criar** e, em seguida, selecione **Criar**.
+1. Selecione **Examinar + criar** e **Criar**.
 
-    [Saiba mais sobre como criar tabelas de rotas](https://docs.microsoft.com/azure/virtual-network/manage-route-table) e [como associar uma tabela de rotas a uma sub-rede](https://docs.microsoft.com/azure/virtual-network/tutorial-create-route-table-portal#associate-a-route-table-to-a-subnet).
+1. Aguarde a conclusão da implantação da tabela de rotas e selecione **Ir para o recurso**.  
 
 ### Associar a tabela de rotas à sub-rede
 
-1. Na caixa de pesquisa, insira **Tabela de rotas**. e selecione Tabelas de rotas nos resultados da pesquisa.
+1. No portal, continue trabalhando com a tabela de rotas, selecione **app-vnet-firewall-rt**.
 
-1. Selecione **app-vnet-firewall-rt**.
+1. Na folha **Configurações**, escolha **Sub-redes** e, em seguida, **+ Associar**.
 
-1. Selecione **sub-redes**.
-
-1. Selecione **+ Associar**.
-
-1. Na página **Associar sub-rede**, insira as informações listadas na tabela abaixo:
+1. Configure uma associação à sub-rede de front-end e clique em **OK.**  
 
     | Propriedade        | Valor              |
     | :-------------- | :----------------- |
     | Rede virtual | **app-vnet** (RG1) |
     | Sub-rede          | **frontend**       |
 
-1. Selecione **OK**.
+1. Configure uma associação à sub-rede de back-end e selecione **OK.**  
 
-1. Repita as etapas acima para associar a tabela de rotas **app-vnet-firewall-rt** à sub-rede de **back-end** no **app-vnet**.
+    | Propriedade        | Valor              |
+    | :-------------- | :----------------- |
+    | Rede virtual | **app-vnet** (RG1) |
+    | Sub-rede          | **frontend**       |
 
 ### Crie uma rota na tabela de rotas
 
-1. Na caixa de pesquisa, insira **Tabela de rotas**. e selecione Tabelas de rotas nos resultados da pesquisa.
+1. No portal, continue trabalhando com a tabela de rotas, selecione **app-vnet-firewall-rt**.
 
-1. Selecione **app-vnet-firewall-rt**.
+1. Na folha **Configurações**, selecione **Rotas** e, em seguida, **+ Adicionar**.
 
-1. Selecione **Rotas**.
-
-1. Selecione **+ Adicionar**.
-
-1. Na página **Adicionar rota**, insira as informações listadas na tabela a seguir.
+1. Configure a rota e selecione **Adicionar**. 
 
     | Propriedade                            | Valor                                                   |
     | :---------------------------------- | :------------------------------------------------------ |
@@ -93,10 +87,18 @@ Agora que há um firewall implantado, com políticas que impõem requisitos de s
     | Tipo de destino                    | **Endereços IP**                                        |
     | Intervalo de CIDR /endereço IP de destino | **0.0.0.0/0**                                           |
     | Tipo do próximo salto                       | **Solução de virtualização**                                   |
-    | Endereço do próximo salto                    | **endereço IP privado do firewall registrado anteriormente** |
+    | Endereço do próximo salto                    | **endereço IP privado do firewall** |
 
-1. Selecione **Adicionar**.
 
-[Saiba mais sobre como criar rotas](https://docs.microsoft.com/azure/virtual-network/manage-route-table#add-a-route).
+### Saiba mais com o treinamento online
 
-Agora, o tráfego de saída da sub-rede de front-end e back-end será roteado para o firewall.
++ [Gerenciar e controlar o fluxo de tráfego em sua implantação do Azure com rotas](https://learn.microsoft.com/training/modules/control-network-traffic-flow-with-routes/). Neste módulo, você aprenderá a controlar o tráfego de rede virtual do Azure implementando rotas personalizadas. Este módulo tem duas áreas restritas. 
+
+### Principais aspectos a serem lembrados
+
+Parabéns por concluir o exercício. Estas foram as principais conclusões:
+
++ O tráfego de rede no Azure é roteado automaticamente entre sub-redes do Azure, redes virtuais e redes locais. As rotas do sistema controlam esse roteamento.
++ Rotas definidas pelo usuário substituem as rotas padrão do sistema para que o tráfego possa ser roteado por meio de NVAs (soluções de virtualização de rede). 
++ As NVAs (soluções de virtualização de rede) controlam o fluxo do tráfego de rede. Exemplos de NVAs são firewalls, balanceadores de carga e roteadores.
++ As tabelas de rotas contêm informações de roteamento e estão associadas a uma sub-rede. 

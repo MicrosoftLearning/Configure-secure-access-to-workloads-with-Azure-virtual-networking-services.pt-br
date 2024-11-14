@@ -1,29 +1,31 @@
 ---
 lab:
-  title: Exercício – Proteger o aplicativo Web contra tráfego mal-intencionado e bloquear o acesso não autorizado
+  title: 'Exercício 03: criar e configurar o Firewall do Azure'
   module: Guided Project - Configure secure access to workloads with Azure virtual networking services
 ---
 
-# Laboratório: proteger o aplicativo Web contra tráfego malicioso e bloquear o acesso não autorizado
+# Exercício 03: criar e configurar o Firewall do Azure
 
 ## Cenário
 
-Sua organização deseja proteger o aplicativo Web contra tráfego mal-intencionado e bloquear o acesso não autorizado.
-
-Além do NSG e do ASG, um firewall pode ser configurado para adicionar uma camada extra de segurança ao aplicativo Web. Um firewall protege o aplicativo Web contra tráfego mal-intencionado e bloqueia o acesso não autorizado usando as políticas configuradas.
-
-A Política de Firewall do Azure é um recurso de nível superior que contém configurações de segurança e operacionais para o Firewall do Azure. Ela permite que você defina uma hierarquia de regra e imponha a conformidade. Nesta tarefa, você configura regras de aplicativo e regras de rede para o firewall usando a Política de Firewall. É possível usar a Política de Firewall do Azure para gerenciar conjuntos de regras que o Firewall do Azure usa para filtrar o tráfego.
-
-### Diagrama de arquitetura
-
-![Diagrama que mostra uma rede virtual com um firewall e uma tabela de rotas.](../Media/task-3.png)
+Sua organização requer segurança de rede centralizada para a rede virtual do aplicativo. À medida que o uso do aplicativo aumenta, será necessária uma filtragem mais granular no nível do aplicativo e proteção contra ameaças avançada. Além disso, espera-se que o aplicativo precise de atualizações contínuas de pipelines do Azure DevOps. Você identifica esses requisitos.
++ O Firewall do Azure é necessário para segurança adicional no app-vnet. 
++ Uma **política de firewall** deve ser configurada para ajudar a gerenciar o acesso ao aplicativo. 
++ É necessária uma **regra do aplicativo** da política de firewall. Essa regra permitirá que o aplicativo acesse o Azure DevOps para que o código do aplicativo possa ser atualizado. 
++ É necessária uma **regra de rede** da política de firewall. Essa regra permitirá a resolução de DNS. 
 
 ### Tarefas de habilidades
 
-- Criar um Firewall do Azure.
-- Criar e configurar uma política de firewall
-- Adicionar uma coleção de regras de aplicativo.
-- Criar uma coleção de regras de rede.
++ Criar um Firewall do Azure.
++ Criar e configurar uma política de firewall
++ Adicionar uma coleção de regras de aplicativo.
++ Criar uma coleção de regras de rede.
+
+## Diagrama de arquitetura
+
+![Diagrama que mostra uma rede virtual com um firewall e uma tabela de rotas.](../Media/task-3.png)
+
+
   
 ## Instruções para o exercício
 
@@ -44,7 +46,7 @@ A Política de Firewall do Azure é um recurso de nível superior que contém co
     | Nome          | **AzureFirewallSubnet** |
     | Intervalo de endereços | **10.1.63.0/24**        |
 
-    > **Observação**: deixe todas as outras configurações como padrão.
+**Observação**: deixe todas as outras configurações como padrão.
 
 ### Criar um Firewall do Azure
 
@@ -75,79 +77,71 @@ A Política de Firewall do Azure é um recurso de nível superior que contém co
 
 ### Atualizar a Política de Firewall
 
-1. Na caixa de pesquisa na parte superior do portal, insira **Política de Firewall**. Selecione **Políticas de Firewall** nos resultados da pesquisa.
+1. No portal, pesquise e selecione `Firewall Policies`. 
 
 1. Selecione **fw-policy**.
 
-1. Selecione **Regras de aplicativo**.
+### Adicionar uma regra de aplicativo
 
-1. Selecione **"+ Coleção de regras de aplicativo"**.
+1. Na folha **Configurações**, selecione **Regras de aplicativo** e, em seguida, **Adicionar uma coleção de regras**.
 
-1. Use os valores na seguinte tabela: Para qualquer propriedade que não seja especificada, use o valor padrão.
+1. Selecione a coleção de regras de aplicativo e, em seguida, **Adicionar**. 
 
     | Propriedade               | Valor                                     |
     | :--------------------- | :---------------------------------------- |
-    | Nome                   | **app-vnet-fw-rule-collection**           |
+    | Nome                   | `app-vnet-fw-rule-collection`         |
     | Tipo de coleção de regras   | **Aplicativo**                           |
-    | Prioridade               | **200**                                   |
+    | Prioridade               | `200`                                   |
     | Ação da coleção de regras | **Permitir**                                 |
     | Grupo de coleções de regras  | **DefaultApplicationRuleCollectionGroup** |
+    | Nome             | `AllowAzurePipelines`                |
+    | Tipo de origem      | **Endereço IP**                         |
+    | Origem           | `10.1.0.0/23`                       |
+    | Protocolo         | `https`                             |
+    | Tipo de destino | **FQDN**                                  |
+    | Destino      | `dev.azure.com, azure.microsoft.com` |
 
-    1. Em **regras**, use os valores na tabela a seguir
+**Observação**: a regra **AllowAzurePipelines** permite que o aplicativo Web acesse o Azure Pipelines . A regra permite que o aplicativo Web acesse o serviço Azure DevOps e o site do Azure.
 
-        | Propriedade         | Valor                                  |
-        | :--------------- | :------------------------------------- |
-        | Nome             | **AllowAzurePipelines**                |
-        | Tipo de origem      | **Endereço IP**                         |
-        | Origem           | **10.1.0.0/23**                        |
-        | Protocolo         | **https**                              |
-        | Tipo de destino | FQDN                                   |
-        | Destino      | **dev.azure.com, azure.microsoft.com** |
+### Adicionar uma regra de rede
 
-        e selecione **Adicionar**
+1. Na folha **Configurações**, selecione **Regras de rede** e, em seguida, **Adicionar uma coleção de rede**.
 
-> **Observação**: a regra **AllowAzurePipelines** permite que o aplicativo Web acesse o Azure Pipelines . A regra permite que o aplicativo Web acesse o serviço Azure DevOps e o site do Azure.
-
-1. Crie uma **coleção de regras de rede** que contenha uma regra de endereço IP usando os valores na tabela a seguir. Para qualquer propriedade que não seja especificada, use o valor padrão.
-
-1. Selecione **Regras de rede**.
-
-1. Selecione **"+ Coleção de regras de rede"**.
-
-1. Use os valores na seguinte tabela: Para qualquer propriedade que não seja especificada, use o valor padrão.
+1. Configure a regra de rede e selecione **Adicionar**.  
 
     | Propriedade               | Valor                                 |
     | :--------------------- | :------------------------------------ |
-    | Nome                   | **app-vnet-fw-nrc-dns**               |
+    | Nome                   | `app-vnet-fw-nrc-dns`               |
     | Tipo de coleção de regras   | **Rede**                           |
-    | Prioridade               | **200**                               |
+    | Prioridade               | `200`                        |
     | Ação da coleção de regras | **Permitir**                             |
     | Grupo de coleções de regras  | **DefaultNetworkRuleCollectionGroup** |
+    | Regra                  | **AllowDns**         |
+    | Origem                | `10.1.0.0/23`      |
+    | Protocolo              | **UDP**              |
+    | Portas de destino     | `53`               |
+    | Endereços de destino | **1.1.1.1, 1.0.0.1** |
 
-    1. Em **regras**, use os valores na tabela a seguir
+### Verificar o firewall e o status da política de firewall
 
-        | Propriedade              | Valor                |
-        | :-------------------- | :------------------- |
-        | Regra                  | **AllowDns**         |
-        | Origem                | **10.1.0.0/23**      |
-        | Protocolo              | **UDP**              |
-        | Portas de destino     | **53**               |
-        | Endereços de destino | **1.1.1.1, 1.0.0.1** |
+1. No portal, pesquise e selecione **Firewall**. 
 
-        e selecione **Adicionar**.
+1. Exiba o **app-vnet-firewall** e verifique se o **Estado de provisionamento** é **Bem-sucedido**. Isso pode levar alguns minutos. 
 
-    Saiba mais sobre [como criar uma regra de aplicativo](https://docs.microsoft.com/azure/firewall/tutorial-firewall-deploy-portal#configure-an-application-rule) e [como criar uma regra de rede](https://docs.microsoft.com/azure/firewall/tutorial-firewall-deploy-portal#configure-a-network-rule).
+1. No portal, pesquise e selecione **Políticas de Firewall**.
 
-1. Para verificar se o estado de provisionamento do Firewall do Azure e da Política de Firewall mostra **Bem-sucedido**.
+1. Visualize a **fw-policy** e verifique se o **Estado de provisionamento** é **Bem-sucedido**. Isso pode levar alguns minutos.
 
-1.Na caixa de pesquisa na parte superior do portal, insira **Firewall**. Selecione **Firewall** nos resultados da pesquisa.
+### Saiba mais com o treinamento online
 
-1. Selecione **app-vnet-firewall**.
++ [Introdução ao Firewall do Azure](https://learn.microsoft.com/training/modules/introduction-azure-firewall/). Neste módulo, você aprenderá sobre os recursos, as regras, as opções de implantação e a administração do Firewall do Azure.
++ [Introdução ao Gerenciador de Firewall do Azure](https://learn.microsoft.com/training/modules/intro-to-azure-firewall-manager/). Neste módulo, você aprenderá como o Gerenciador de Firewall do Azure fornece política de segurança central e gerenciamento de rotas para parâmetros de segurança baseados em nuvem.
 
-1– Validar se o **Estado de provisionamento** é **Bem-sucedido**.
+### Principais aspectos a serem lembrados
 
-1– Na caixa de pesquisa na parte superior do portal, insira **Políticas de firewall**. Selecione **Políticas de firewall** nos resultados da pesquisa
+Parabéns por concluir o exercício. Estas foram as principais conclusões:
 
-1. Selecione **fw-policy**.
-
-1– Validar se o **Estado de provisionamento** é **Bem-sucedido**.
++ O Firewall do Azure é um serviço de segurança baseado em nuvem que protege seus recursos da rede virtual do Azure contra ameaças de entrada e de saída.
++ Uma política de firewall do Azure é um recurso que contém uma ou mais coleções de regras de NAT, rede e aplicativo.
++ As regras de rede permitem ou negam tráfego com base em endereços IP, portas e protocolos.
++ As regras de aplicativo permitem ou negam tráfego com base em FQDNs (nomes de domínio totalmente qualificados), URLs e protocolos HTTP/HTTPS.
