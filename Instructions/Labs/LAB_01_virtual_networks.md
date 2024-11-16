@@ -1,34 +1,37 @@
 ---
 lab:
-  title: 'Exercício: fornecer isolamento e segmentação de rede para o aplicativo Web'
+  title: 'Exercício 01: criar e configurar redes virtuais'
   module: Guided Project - Configure secure access to workloads with Azure virtual networking services
 ---
 
-# Laboratório: Forneça uma rede virtual de hub de serviços compartilhados com isolamento e segmentação
+# Exercício 01: criar e configurar redes virtuais
 
 ## Cenário
 
-Você foi encarregado de aplicar os [princípios Confiança Zero](https://learn.microsoft.com/security/zero-trust/azure-infrastructure-networking) a uma rede virtual de hub no Azure. O departamento de TI precisa de isolamento e segmentação de rede para a aplicação web em uma rede falada. Para fornecer isolamento e segmentação de rede para a aplicação web, é necessário criar uma rede virtual Azure com sub-redes com espaço de endereço fornecido pela equipa de TI. Após a rede virtual ser criada, a próxima etapa é configurar o emparelhamento de rede virtual. Isso permite que as redes virtuais se comuniquem entre si de modo seguro e privado.
+Sua organização está migrando um aplicativo baseado na Web para o Azure. Sua primeira tarefa é implementar as redes virtuais e sub-redes. Você também precisa emparelhar as redes virtuais com segurança. Você identifica esses requisitos. 
++ Duas redes virtuais são necessárias, **app-vnet** e **hub-vnet**. Isso simula uma arquitetura de rede hub and spoke. 
++ O app-vnet hospedará o aplicativo. Essa rede virtual requer duas sub-redes. A **sub-rede de front-end** hospedará os servidores Web. A **sub-rede de back-end ** hospedará os servidores de banco de dados.
++ O hub-vnet requer apenas uma sub-rede para o firewall. 
++ As duas redes virtuais devem ser capazes de se comunicar entre si de forma segura e privada por meio do **emparelhamento de rede virtual**. 
++ As duas redes virtuais emparelhadas devem estar na mesma região. 
 
-### Diagrama de arquitetura
+## Tarefas de habilidades
+
++ Crie uma rede virtual.
++ Crie uma sub-rede.
++ Configurar o emparelhamento de VNets.
+
+## Diagrama de arquitetura
 
 ![Diagrama que mostra duas redes virtuais emparelhadas.](../Media/task-1.png)
 
-### Tarefas de habilidades
-
-- Criar uma rede virtual
-- Criar uma sub-rede
-- Configurar o emparelhamento VNet
-
 ## Instruções para o exercício
 
->**Observação**: para concluir este laboratório, você precisará de uma [Assinatura do Azure](https://azure.microsoft.com/free/) com a função RBAC do **Colaborador** atribuída.
-
-> Neste laboratório, quando for solicitado que você crie um recurso, para qualquer propriedade que não for especificada, use o valor padrão.
+**Observação**: para concluir este laboratório, você precisará de uma [Assinatura do Azure](https://azure.microsoft.com/free/) com a função RBAC do **Colaborador** atribuída. Neste laboratório, quando for solicitado que você crie um recurso, para qualquer propriedade que não for especificada, use o valor padrão.
 
 ### Criar redes e sub-redes virtuais hub and spoke
 
-Comece criando as redes virtuais mostradas no diagrama acima.
+Uma [rede virtual do Azure](https://learn.microsoft.com/azure/virtual-network/virtual-networks-overview) permite que muitos tipos de recursos do Azure se comuniquem com segurança entre si, com a Internet e com redes locais. Todos os recursos do Azure em uma rede virtual são implantados em [sub-redes](https://learn.microsoft.com/azure/virtual-network/virtual-network-manage-subnet?tabs=azure-portal) dentro da rede virtual. 
 
 1. Entre no **portal do Azure** - `https://portal.azure.com`.
    
@@ -60,9 +63,13 @@ Comece criando as redes virtuais mostradas no diagrama acima.
     | Nome da sub-rede          | **AzureFirewallSubnet**  |
     | Intervalo de endereços da sub-rede | **10.0.0.0/24**          |
 
-1. Depois que as implantações forem concluídas, pesquise e selecione seu **grupo de recursos**. Confirme se suas novas redes virtuais fazem parte do grupo de recursos. 
+1. Depois que as implantações forem concluídas, pesquise e selecione as suas "redes virtuais".
+
+1. Verifique se suas redes virtuais e sub-redes foram implantadas. 
 
 ### Configurar uma relação de par entre as redes virtuais
+
+O [emparelhamento de rede virtual](https://learn.microsoft.com/azure/virtual-network/virtual-network-peering-overview) permite que você conecte duas ou mais redes virtuais no Azure sem interrupção. 
 
 1. Pesquise e selecione a rede virtual `app-vnet`.
    
@@ -72,12 +79,24 @@ Comece criando as redes virtuais mostradas no diagrama acima.
 
     | Propriedade                                 | Valor                          |
     | :--------------------------------------- | :----------------------------- |
-    | Nome do link de emparelhamento              | `app-vnet-to-hub` |
+    | Nome do link de emparelhamento remoto              | `app-vnet-to-hub` |
     | Rede virtual    | `hub-vnet` |
     | Nome do link do emparelhamento de rede virtual | `hub-to-app-vnet` |
 
     **Observação**: deixe todas as outras configurações como padrão. Selecione **"Adicionar"** para criar o emparelhamento de rede virtual.
 
-    [Saiba mais sobre o Emparelhamento de Rede Virtual](https://learn.microsoft.com/azure/virtual-network/virtual-network-manage-peering?tabs=peering-portal)
+1. Depois que a implantação for concluída, verifique se o **Status do emparelhamento** é **Conectado**.
 
-1. Depois que a implantação for concluída, verifique se o **Status do emparelhamento** é **Conectado**. 
+## Saiba mais com o treinamento online
+
++ [Introdução às Redes Virtuais do Azure](https://learn.microsoft.com/training/modules/introduction-to-azure-virtual-networks/). Neste módulo, você aprenderá a projetar e implementar os serviços de rede do Azure. Você aprenderá sobre redes virtuais, IPs públicos e privados, DNS, emparelhamento de rede virtual, roteamento e NAT Virtual do Azure.
+
+## Principais aspectos a serem lembrados
+
+Parabéns por concluir o exercício. Estas foram as principais conclusões:
+
++ As VNets (redes virtuais) do Azure fornecem um ambiente de rede seguro e isolado para os seus recursos de nuvem. É possível criar várias redes virtuais por região por assinatura.
++ Ao projetar redes virtuais, certifique-se de que o espaço de endereço da VNet (bloco CIDR) não se sobreponha aos outros intervalos de rede da sua organização.
++ Uma sub-rede é um intervalo de endereços IP na rede virtual. Você pode segmentar VNets em sub-redes de tamanhos diferentes, criando quantas sub-redes você precisar para organização e segurança dentro do limite de assinatura. Cada sub-rede deve ter um intervalo de endereços exclusivo.
++ Determinados serviços do Azure, como o Firewall do Azure, requerem uma sub-rede própria.
++ O emparelhamento de rede virtual permite que você conecte duas redes virtuais do Azure sem interrupção. As redes virtuais aparecerão como uma só para fins de conectividade.
