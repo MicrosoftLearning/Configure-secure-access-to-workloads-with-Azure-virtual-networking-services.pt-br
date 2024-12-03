@@ -52,7 +52,9 @@ Essa é a regra de rede que permite o acesso de saída para dois endereços IP n
 10. Em Protocolo, selecione UDP.
 11. Em Portas de Destino, insira 53.
 12. Em Tipo de destino, selecione Endereço IP.
-13. Em Destino, insira 209.244.0.3,209.244.0.4.
+
+>**Observação**: os alunos devem agora ser capazes de completar LAB_04
+14. Em Destino, insira 209.244.0.3,209.244.0.4.
 Esses são servidores DNS públicos operados pelo CenturyLink.
-14. Selecione Adicionar.
+15. Selecione Adicionar.
 

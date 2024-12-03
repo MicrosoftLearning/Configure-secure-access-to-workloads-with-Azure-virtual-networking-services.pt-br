@@ -5,9 +5,9 @@ demo:
 ---
 ## Demonstração – Materiais do aluno e ambiente de laboratório (opcional)
 
-Use esta demonstração para mostrar aos alunos como acessar o ambiente de laboratório e os materiais dos alunos. Você pode fazer isso no início da aula ou antes da próxima demonstração. 
+Use esta demonstração para mostrar aos alunos como acessar o ambiente do laboratório e os materiais do aluno. Você pode fazer isso no início da aula ou antes da próxima demonstração. 
 
-### Mostre aos alunos o ambiente de laboratório (ajuste para o hoster do laboratório)
+### Mostre aos alunos o ambiente do laboratório (ajuste para o hoster do laboratório)
 
 - Discuta como os alunos acessam o ambiente de laboratório. 
 
@@ -33,8 +33,8 @@ Use esta demonstração para mostrar aos alunos como acessar o ambiente de labor
 
 - Explique que o conteúdo é material de referência e não há um mapeamento 1:1 com as apresentações em sala de aula.
 
-- Discuta como cada um desses módulos pode ter atividades práticas adicionais. Você identificará essas atividades à medida que o curso progride. 
+- Discuta que cada um desses módulos pode ter atividades práticas adicionais. Você identificará essas atividades à medida que o curso avançar. 
 
-- Peça aos alunos que localizem e indiquem o roteiro de aprendizagem.
+- Peça aos alunos que localizem e marquem o roteiro de aprendizagem.
 
  
