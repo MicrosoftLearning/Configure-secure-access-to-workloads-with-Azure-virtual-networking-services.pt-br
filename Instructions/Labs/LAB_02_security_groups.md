@@ -41,7 +41,9 @@ Sua organização requer o controle do tráfego de rede no the app-vnet. Você i
 
 1. O armazenamento não é necessário para esta tarefa Selecionar assinatura. 
 
-1. Implante as máquinas virtuais necessárias para este exercício. 
+1. Implante as máquinas virtuais necessárias para este exercício.
+
+>**Observação**: se a implantação falhar devido à restrição de capacidade, edite o modelo e altere o valor "local". 
 
    ```powershell
    $RGName = "RG1"
@@ -63,7 +65,7 @@ Os [ASGs (grupos de segurança do aplicativo)](https://learn.microsoft.com/azure
     | :------------- | :--------------------------- |
     | Subscription   | **Selecione sua assinatura** |
     | Grupo de recursos | **RG1**                      |
-    | Nome           | `app-backend-asg`          |
+    | Nome           | `app-frontend-asg`          |
     | Region         | **Leste dos EUA**                  |
 
 1. Selecione **Examinar + Criar** e, em seguida, selecione **Criar**.
@@ -76,7 +78,7 @@ Os [ASGs (grupos de segurança do aplicativo)](https://learn.microsoft.com/azure
 
 1. Clique na folha **Rede**, selecione **Grupos de segurança do aplicativo** e clique em **Adicionar grupos de segurança do aplicativo**.
 
-1. Selecione o **app-backend-asg** e, em seguida, **Adicionar**.
+1. Selecione **app-frontend-asg** e clique em **Adicionar**.
    
 ### Criar e associar o grupo de segurança de rede
 

@@ -71,7 +71,7 @@ O Azure cria automaticamente uma [tabela de rotas](https://learn.microsoft.com/a
     | Propriedade        | Valor              |
     | :-------------- | :----------------- |
     | Rede virtual | **app-vnet** (RG1) |
-    | Sub-rede          | **frontend**       |
+    | Sub-rede          | **back-end**       |
 
 ### Crie uma rota na tabela de rotas
 
