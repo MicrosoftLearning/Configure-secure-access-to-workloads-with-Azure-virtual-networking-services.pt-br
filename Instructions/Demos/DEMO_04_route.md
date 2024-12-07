@@ -39,28 +39,11 @@ Uma tabela de rotas pode ser associada a zero ou mais sub-redes. As tabelas de r
 
 1.  Navegue até a sub-rede que você deseja associar à tabela de roteamento.
 
-1.  Selecione a **Tabela de rotas* e escolha sua nova tabela de roteamento. 
+1.  Selecione  **Tabela de rotas** e escolha sua nova tabela de roteamento. 
 
 1.  **Salve** suas alterações.
 
  
 >**Observação**: você só pode associar uma tabela de rotas a sub-redes em redes virtuais que existam no mesmo local e assinatura do Azure que a tabela de rotas.
-
-### Testar o firewall
-Agora, teste o firewall para confirmar que as políticas de roteamento e de firewall estão funcionando conforme o esperado. 
-
-1.  Conecte uma Área de Trabalho Remota ao endereço IP público do firewall e entre na máquina virtual Srv-Work.
-2.  Abra o Internet Explorer e navegue até https://www.google.com.
-3.  Selecione OK > Fechar nos alertas de segurança do Internet Explorer. Você deve ver a página inicial do Google.
-4.  Navegue até https://www.microsoft.com. Você deve ser bloqueado pelo firewall.
-
-Agora que você verificou se as regras de firewall estão funcionando:
-- Você pode navegar para o FQDN permitido, mas não para os outros.
-- É possível resolver nomes DNS usando o servidor DNS externo configurado.
- 
->**Observação**: os alunos devem agora ser capazes de completar LAB_03
-
-
-
 
 >**Observação**: os alunos devem agora ser capazes de completar LAB_04
