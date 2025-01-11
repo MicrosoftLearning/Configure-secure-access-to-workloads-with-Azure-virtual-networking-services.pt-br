@@ -1,45 +1,45 @@
 ---
 demo:
-  title: 'Demonstração: criar e configurar o DNS do Azure'
-  module: Guided Project - Configure secure access to workloads with Azure virtual networking services
+    title: 'Demonstration: Create and configure Azure DNS'
+    module: 'Guided Project - Configure secure access to workloads with Azure virtual networking services'
 ---
-## Demonstração – Criar e configurar o DNS do Azure
+## Demonstration – Create and configure Azure DNS
 
-Nesta demonstração, exploraremos o DNS do Azure.
+In this demonstration, you will explore Azure DNS.
 
-[Tutorial: hospedar seu domínio e subdomínio – DNS do Azure](https://docs.microsoft.com/azure/dns/dns-delegate-domain-azure-dns)
-
-
-**Criar uma zona DNS privada**
-
-1. Acessar o portal do Azure.
-
-1. Procure o serviço de  **zonas DNS** .
-
-1. Crie uma **zona DNS** e explique a finalidade da zona. Para um nome, você pode usar contoso.internal.com.
-
-1.  Aguarde a zona DNS ser criada. Talvez seja necessário **Atualizar** a página.
-
-**Adicionar conjunto de registros DNS**
+[Tutorial: Host your domain and subdomain - Azure DNS](https://docs.microsoft.com/azure/dns/dns-delegate-domain-azure-dns)
 
 
-[Tutorial: criar um registro de alias para se referir a um registro de recurso de zona](https://learn.microsoft.com/azure/dns/tutorial-alias-rr)
+**Create a private DNS zone**
 
-1. Depois que sua zona for criada, selecione **+Conjunto de registros**.
+1. Access the Azure Portal.
 
-1. Use a lista suspensa **Tipo** para exibir os diferentes tipos de registros. Revise como os diferentes tipos de registro são usados. Observe como as informações do registro mudam à medida que você seleciona diferentes tipos de registro.
+1. Search for the **DNS zones** service.
 
-1. Crie um registro **A** como exemplo. 
+1. Create a **DNS zone** and explain the purpose of the zone. For a name you can use contoso.internal.com.
 
-**Link VNet para registro automático**
+1.  Wait for the DNS zone to be created. You may need to **Refresh** the page.
 
-1.  Depois que a Zona DNS for implantada, revise a página de visão geral com os alunos.
-1.  vincular a zona DNS privada a uma rede virtual criando um link de rede virtual.
-1.  No painel esquerdo, selecione Links de rede virtual.
-1.  Selecione Adicionar.
-1.  Digite myLink como o Nome do link.
-1.  Para Rede virtual, selecione myAzureVNet.
-1.  Marque a caixa de seleçãoHabilitar o registro automático.
-1.  Selecione OK.
+**Add a DNS record set**
 
->**Observação**: agora, os alunos devem ser capazes de completar LAB_05
+
+[Tutorial: Create an alias record to refer to a zone resource record](https://learn.microsoft.com/azure/dns/tutorial-alias-rr)
+
+1. Once your zone is created, select **+Record Set**.
+
+1. Use the **Type** drop-down to view the different types of records. Review how the different record types are used. Notice how the record information changes as you select different record types.
+
+1. Create an **A** record as an example. 
+
+**Link VNet for auto registration**
+
+1.	Once the DNS Zone is deployed review the overview page with the students.
+1.	link the private DNS zone to a virtual network, by creating a virtual network link.
+1.	On the left pane, select Virtual network links.
+1.	Select Add.
+1.	Type myLink for the Link name.
+1.	For Virtual network, select myAzureVNet.
+1.	Select the Enable auto registration check box.
+1.	Select OK.
+
+>**Note**: Students should now be able to complete LAB_05

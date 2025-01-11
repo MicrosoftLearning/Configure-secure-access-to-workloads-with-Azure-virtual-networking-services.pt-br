@@ -1,40 +1,40 @@
 ---
 demo:
-  title: 'Demonstração: materiais do aluno e ambiente de laboratório (ajustar)'
-  module: Guided Project - Configure secure access to workloads with Azure virtual networking services
+    title: 'Demonstration: Student materials and lab environment (adjust)'
+    module: 'Guided Project - Configure secure access to workloads with Azure virtual networking services'
 ---
-## Demonstração – Materiais do aluno e ambiente de laboratório (opcional)
+## Demonstration - Student materials and lab environment (optional)
 
-Use esta demonstração para mostrar aos alunos como acessar o ambiente do laboratório e os materiais do aluno. Você pode fazer isso no início da aula ou antes da próxima demonstração. 
+Use this demonstration to show students how to access the lab environment and student materials. You can do this at the beginning of class or before the next demonstration. 
 
-### Mostre aos alunos o ambiente do laboratório (ajuste para o hoster do laboratório)
+### Show students the lab environment (adjust for your lab hoster)
 
-- Discuta como os alunos acessam o ambiente de laboratório. 
+- Discuss how students access the lab environment. 
 
-- Explique como entrar no host da máquina virtual.
+- Explain how to sign-in to the virtual machine host.
 
-- Explique como acessar o [portal do Azure](https://portal.azure.com). É preferível abrir o portal do Azure no ambiente de laboratório em vez de uma janela separada. Peça uma demonstração de quantos alunos já usaram o portal. 
+- Explain how to access the [Azure portal](https://portal.azure.com). It is preferred to open the Azure portal in the lab environment instead of a separate window. Ask for a show of hands on how many students have used the portal. 
 
-- Explique quais recursos já foram configurados para os laboratórios.
+- Explain what resources have already been configured for the labs.
 
-- Revise como usar as instruções do laboratório. 
+- Review how to use the lab instructions. 
 
-- Adicione outros tópicos específicos ao seu hoster. 
+- Add other topics specific to your hoster. 
 
-### Mostre aos alunos os materiais do curso.
+### Show students their course materials.
 
-- Acesse a [página do Microsoft Learn](https://learn.microsoft.com).
+- Access the [Microsoft Learn page](https://learn.microsoft.com).
 
-- Discuta como o Microsoft Learn é uma ótima fonte para toda a documentação, treinamento, certificações e avaliações do Azure. 
+- Discuss that Microsoft Learn is a great source for all Azure documentation, training, certifications, and assessments. 
 
-- Selecione **Roteiros de aprendizagem** e, em seguida, pesquise o roteiro de aprendizagem **Configurar acesso seguro às suas cargas de trabalho utilizando o sistema de rede virtual do Azure**.
+- Select **Learning Paths** and then search for the **Configure secure access to your workloads using Azure virtual networking** learning path.
 
-- Discuta como o conteúdo no roteiro de aprendizagem é específico para essa avaliação, mas há muito mais conteúdo de armazenamento que eles podem revisar.
+- Discuss that the content in the learning path is specific to this assessment, but there is much more storage content they can review.
 
-- Explique que o conteúdo é material de referência e não há um mapeamento 1:1 com as apresentações em sala de aula.
+- Explain the content is reference material and there isn't a 1:1 mapping with the classroom presentations.
 
-- Discuta que cada um desses módulos pode ter atividades práticas adicionais. Você identificará essas atividades à medida que o curso avançar. 
+- Discuss that each of these modules may have additional hands-on activities. You will identify these activities as the course progresses. 
 
-- Peça aos alunos que localizem e marquem o roteiro de aprendizagem.
+- Ask the students to locate and bookmark the learning path.
 
  
