@@ -1,49 +1,50 @@
 ---
 demo:
-  title: 'Demonstração: criar e configurar o roteamento de rede'
-  module: Guided Project - Configure secure access to workloads with Azure virtual networking services
+    title: 'Demonstration: Create and configure network routing'
+    module: 'Guided Project - Configure secure access to workloads with Azure virtual networking services'
 ---
-## Demonstração – Criar e configurar o roteamento de rede
+## Demonstration – Create and configure network routing
 
-Nesta demonstração, aprenderemos como criar uma tabela de rotas, definir uma rota personalizada e associar a rota a uma sub-rede. 
-
-
-**Observação:** esta demonstração requer uma rede virtual com pelo menos uma sub-rede.
-
-[Rotear o tráfego de rede – tutorial – portal do Azure](https://learn.microsoft.com/azure/virtual-network/tutorial-create-route-table-portal#create-a-route-table)
+In this demonstration, we will learn how to create a route table, define
+a custom route, and associate the route with a subnet. 
 
 
-### Criar uma tabela de rotas 
+**Note:** This demonstration requires a virtual network with at least one subnet.
 
-1. À medida que tiver tempo, reveja o diagrama do tutorial. Explique por que você precisa criar uma rota definida pelo usuário. 
+[Route network traffic - tutorial - Azure portal](https://learn.microsoft.com/azure/virtual-network/tutorial-create-route-table-portal#create-a-route-table)
 
-1. Acesse o portal do Azure.
 
-1. Pesquise por **Tabela de rotas** e selecione essa opção. Discuta quando **as rotas de gateway de propagação** devem ser usadas. 
+### Create a Route table 
 
-1. Crie uma tabela de roteamento e explique as configurações incomuns. 
+1. As you have time review the tutorial diagram. Explain why you need to create a user-defined route. 
 
-1. Aguarde até que a nova tabela de roteamento seja implantada.
+1. Access the Azure portal.
 
-**Adicionar uma rota**
+1. Search for and select **Route tables**. Discuss when **propagate gateway routes** should be used. 
 
-1.  Selecione sua nova tabela de roteamento e, em seguida, selecione **Rotas**.
+1. Create a routing table, explain any uncommon settings. 
 
-1.  Crie uma nova **rota**. Discuta os diferentes **tipos de saltos** disponíveis. 
+1. Wait for the new routing table to be deployed.
 
-1.  Crie a nova rota e aguarde a implantação do recurso.
+**Add a route**
+
+1.  Select your new routing table, and then select **Routes**.
+
+1.  Create a new **route**. Discuss the different **hop types** that are available. 
+
+1.  Create the new route and wait for the resource to be deployed.
  
-### Associar uma tabela de rotas a uma sub-rede
-Uma tabela de rotas pode ser associada a zero ou mais sub-redes. As tabelas de rotas não estão associadas às redes virtuais. Você deve associar a tabela de rotas para cada sub-rede à qual deseja associar a tabela de rotas.
+### Associate a Route Table to a subnet
+A route table can be associated to zero or more subnets. Route tables aren't associated to virtual networks. You must associate a route table to each subnet you want the route table associated to.
 
 
-1.  Navegue até a sub-rede que você deseja associar à tabela de roteamento.
+1.  Navigate to the subnet you want to associate with the routing table.
 
-1.  Selecione  **Tabela de rotas** e escolha sua nova tabela de roteamento. 
+1.  Select **Route table** and choose your new routing table. 
 
-1.  **Salve** suas alterações.
+1.  **Save** your changes.
 
  
->**Observação**: você só pode associar uma tabela de rotas a sub-redes em redes virtuais que existam no mesmo local e assinatura do Azure que a tabela de rotas.
+>**Note**: You can only associate a route table to subnets in virtual networks that exist in the same Azure location and subscription as the route table.
 
->**Observação**: os alunos devem agora ser capazes de completar LAB_04
+>**Note**: Students should now be able to complete LAB_04
