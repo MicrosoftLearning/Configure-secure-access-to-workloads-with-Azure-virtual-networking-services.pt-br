@@ -10,9 +10,7 @@ lab:
 
 Sua organização requer o controle do tráfego de rede no the app-vnet. Você identifica esses requisitos.
 + A sub-rede front-end tem servidores Web que podem ser acessados pela Internet. Um ASG (**grupo de segurança do aplicativo**) é necessário para esses servidores. O ASG deve ser associado a qualquer interface de máquina virtual que faça parte do grupo. Isso permitirá que os servidores da web sejam facilmente gerenciados. 
-+ Uma **regra do NSG** é necessária para permitir o tráfego HTTPS de entrada para o ASG. Essa regra usa o protocolo TCP na porta 443. 
 + A sub-rede de back-end tem servidores de banco de dados usados pelos servidores Web de front-end. Um NSG (**grupo de segurança de rede**) é necessário para controlar esse tráfego. O NSG deve ser associado a qualquer interface de máquina virtual que será acessada pelos servidores Web. 
-+ Uma **regra do NSG** é necessária para permitir o tráfego de rede de entrada do ASG para os servidores de back-end.  Essa regra usa o serviço MS SQL e a porta 1443. 
 + Para teste, uma máquina virtual deve ser instalada na sub-rede de front-end (VM1) e na sub-rede de back-end (VM2).  O grupo de TI forneceu um modelo do Azure Resource Manager para implantar esses **servidores Ubuntu**. 
 
 ## Tarefas de habilidades
@@ -39,9 +37,9 @@ Sua organização requer o controle do tráfego de rede no the app-vnet. Você i
 
 1. Se for solicitado que você selecione **Bash** ou **PowerShell**, selecione **PowerShell**.
 
-1. O armazenamento não é necessário para esta tarefa Selecionar assinatura. 
+1. O armazenamento não é necessário para esta tarefa Selecionar assinatura. **Aplique** as alterações. 
 
-1. Implante as máquinas virtuais necessárias para este exercício.
+1. Use esses comandos para implantar as máquinas virtuais necessárias para este exercício.
 
 >**Observação**: se a implantação falhar devido à restrição de capacidade, edite o modelo e altere o valor "local". 
 
@@ -74,7 +72,7 @@ Os [ASGs (grupos de segurança do aplicativo)](https://learn.microsoft.com/azure
 
 **Associar o grupo de segurança do aplicativo à interface de rede da VM**
 
-1. No portal do Azure, pesquise e selecione `VM2`.
+1. No portal do Azure, pesquise e selecione `VM1`.
 
 1. Clique na folha **Rede**, selecione **Grupos de segurança do aplicativo** e clique em **Adicionar grupos de segurança do aplicativo**.
 
@@ -126,7 +124,7 @@ Um NSG usa [regras de segurança](https://learn.microsoft.com/azure/virtual-netw
     | Fonte                                 | **Qualquer**                        |
     | Intervalos de portas de origem                     | **\***                         |
     | Destino                            | **Grupo de segurança do aplicativo** |
-    | Grupo de segurança do aplicativo de destino | **app-backend-asg**            |
+    | Grupo de segurança do aplicativo de destino | **app-frontend-asg**            |
     | Serviço                                | **SSH**                        |
     | Ação                                 | **Permitir**                      |
     | Prioridade                               | **100**                        |
