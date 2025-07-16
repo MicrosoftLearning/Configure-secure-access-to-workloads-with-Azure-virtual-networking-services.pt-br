@@ -41,7 +41,7 @@ Sua organização requer o controle do tráfego de rede no the app-vnet. Você i
 
 1. Use esses comandos para implantar as máquinas virtuais necessárias para este exercício.
 
->**Observação**: se a implantação falhar devido à restrição de capacidade, edite o modelo e altere o valor "local". 
+>**Observação**: se a implantação falhar devido a restrição de capacidade, edite o modelo e altere o valor do "local". 
 
    ```powershell
    $RGName = "RG1"
