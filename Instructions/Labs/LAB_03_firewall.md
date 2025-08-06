@@ -70,6 +70,7 @@ Sua organização requer segurança de rede centralizada para a rede virtual do 
     | Escolher uma rede virtual | **Usar existente**                                  |
     | Rede virtual          | **app-vnet** (RG1)                                |
     | Endereço IP público        | Adicionar nova: **fwpip**                                |
+    | Habilitar a NIC de Gerenciamento do Firewall | **desmarcar a caixa**                         |
 
     [Saiba mais sobre como criar um firewall](https://docs.microsoft.com/azure/firewall/tutorial-firewall-deploy-portal).
 
